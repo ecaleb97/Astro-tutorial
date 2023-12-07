@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getStaticPaths } from "./[tag].astro";
+
+const tags = await getStaticPaths()
+const pageTitle = "Tag index"
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <ul class="tags">
+    {
+      tags.map(tag => {
+        return (
+          <li class="tag">
+            <a href={`/tags/${tag.params.tag}`}>{tag.params.tag}</a>
+          </li>
+        )
+      })
+    }
+  </ul>
+</BaseLayout>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+  }
+
+  .tag {
+    margin: 0.25rem;
+    border: dotted 1px #a1a1a1;
+    border-radius: .5em;
+    padding: .5em 1em;
+    font-size: 1.15em;
+    background-color: #f8fcfd;
+  }
+
+  a {
+    color: #6d33c5;
+  }
+</style>
